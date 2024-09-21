@@ -4,8 +4,18 @@ import pandas as pd
 from PIL import Image
 import io
 
+db_url = 'https://raw.githubusercontent.com/Joelroys637/firebasedatabase/df0963c8929de6a52115df621afff3a83d8b0385/datasignup.db'
 
-conn = sqlite3.connect('https://github.com/Joelroys637/firebasedatabase/blob/df0963c8929de6a52115df621afff3a83d8b0385/datasignup.db')
+# Download the database file
+response = requests.get(db_url)
+
+# Save the file locally
+with open('datasignup.db', 'wb') as f:
+    f.write(response.content)
+
+# Now connect to the downloaded database
+conn = sqlite3.connect('datasignup.db')
+
 c = conn.cursor()
 
 # Create a table for storing user credentials if it doesn't exist
